@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= data.name%>
+  </title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Homemade+Apple&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+  <Style>
+    * {
+      background-color: rgb(75, 75, 75);
+      font-family: "Roboto Mono", monospace;
+      color: white;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    span {
+      margin: 2rem;
+    }
+
+    td:nth-child(even) {
+      padding-left: 50px;
+    }
+  </Style>
+</head>
+
+<body>
+  <h1> Student Page</h1>
+  <table>
+    <tr>
+      <td>Student Id</td>
+      <td>
+        <%= data.id %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Fullname
+      </td>
+      <td>
+        <%= data.name%>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Age</td>
+      <td>
+        <%= data.age %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Merit Scholarship</td>
+      <td>
+        <%= data.scholarship.merit %>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>Other Scholarship</td>
+      <td>
+        <%= data.scholarship.other %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Total Scholarship</td>
+      <td>
+        <%= data.scholarship.merit + data.scholarship.other %>
+      </td>
+    </tr>
+  </table>
+
+  <span><a href="/students/edit/<%= data.id %>">edit</a> <a href="#"
+      onclick="deleteStudent('<%= data.id %>')">Delete</a></span>
+  <p> <a href="/students">Go back to students page</a></p>
+
+  <script>
+    function deleteStudent(id) {
+      fetch(`/students/delete/${id}`, {
+        method: 'DELETE'
+      })
+        .then(res => res.text())
+        .then(msg => {
+          alert(msg)
+          location.reload() // 刪除後重新載入頁面
+        })
+        .catch(err => console.error("刪除失敗", err))
+    }
+  </script>
+</body>
+
+</html>

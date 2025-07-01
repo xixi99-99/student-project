@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Student</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Homemade+Apple&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      background-color: rgb(75, 75, 75);
+      font-family: "Roboto Mono", monospace;
+      box-sizing: border-box;
+      color: white;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 20vw;
+    }
+
+    input {
+      /* width: 15rem; */
+      margin: 0.5rem 1rem;
+      border: 1px solid #6a6a6a;
+      padding: 0.5rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #6a6a6a;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Editing <%= data.name%>'s Profile</h1>
+
+  <form action="/students/edit/<%= data.id %>?_method=PUT" method="POST">
+    <label for="id">ID:</label>
+    <input type="number" id="id" name="id" value="<%= data.id %>" />
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="<%= data.name %>" />
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" value="<%= data.age %>" />
+
+    <label for="merit">Merit:</label>
+    <input type="number" id="merit" name="merit" value="<%= data.scholarship.merit %>" />
+
+    <label for="other">Other:</label>
+    <input type="number" id="other" name="other" value="<%= data.scholarship.other %>" />
+
+    <button type="submit">Submit</button>
+  </form>
+
+
+</body>
+
+</html>
